@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Youssef's gift🐻</title>
+  <style>
+    /* Style général pour centrer le contenu */
+    body {
+      background-color: #f0f8ff;
+      text-align: center;
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    /* Style du titre */
+    h1 {
+      font-size: 2.5em;
+      color: #333;
+      margin: 20px 0;
+    }
+
+    /* Style du GIF */
+    #dodoGif {
+      width: 200px;
+      margin: 20px 0;
+    }
+
+    /* Style du bouton en forme de nuage */
+    button {
+      background-color: #fff;
+      border: 2px solid #f4b0fa;
+      color: #eeddee;
+      font-size: 1.2em;
+      padding: 15px 30px;
+      border-radius: 50px;
+      cursor: pointer;
+      transition: transform 0.2s, background-color 0.2s, color 0.2s;
+      margin-top: 20px;
+      position: relative;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+
+    button.cloud {
+      background-color: #f4b0fa;
+      color: white;
+    }
+
+    button:hover {
+      transform: scale(1.1);
+    }
+
+    /* Style des confettis */
+    .confetti {
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      background-color: rgba(255, 182, 193, 0.8);
+      animation: fall 5s linear infinite;
+    }
+
+    /* Animation des confettis */
+    @keyframes fall {
+      0% { 
+        transform: translateY(0);
+        opacity: 1;
+      }
+      100% { 
+        transform: translateY(800px); 
+        opacity: 0;
+      }
+    }
+
+    /* Style des bisous */
+    .kiss {
+      position: absolute;
+      font-size: 3em;
+      animation: float 3s linear infinite;
+      transform: rotate(45deg);
+    }
+
+    /* Animation des bisous */
+    @keyframes float {
+      0% { 
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+      }
+      100% { 
+        transform: translateY(-600px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+  </style>
+</head>
+<body>
+
+  <h1>Bravo pour ta Victoire Baby! 🏁</h1>
+
+  <!-- GIF du dodo au début -->
+  <img id="dodoGif" src="dodo.gif" alt="Dodo GIF">
+
+  <!-- Bouton en forme de nuage pour déclencher la fête -->
+  <button id="actionButton" class="cloud" onclick="startParty()">Prêt pour la fête !</button>
+
+  <script>
+    // Fonction pour commencer la fête avec des confettis
+    function startParty() {
+      // Afficher les confettis
+      for (let i = 0; i < 100; i++) {
+        let confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.top = Math.random() * -100 + 'px'; // Commence au-dessus de l'écran
+        confetti.style.backgroundColor = getRandomColor();
+        confetti.style.animationDuration = (Math.random() * 3 + 2) + 's'; // Durée aléatoire
+        document.body.appendChild(confetti);
+      }
+
+      // Changer le bouton après quelques secondes
+      setTimeout(() => {
+        let button = document.getElementById('actionButton');
+        button.textContent = 'Moi faire bisous a toi 🥺🥰?!';
+        button.classList.remove('cloud');
+        button.classList.add('cloud');
+        button.onclick = sendKisses;
+
+        // Changer le GIF à un autre montrant des câlins
+        document.getElementById('dodoGif').src = 'calin.gif'; // Remplace par le bon lien du GIF
+      }, 3000);
+    }
+
+    // Fonction pour générer des bisous sur l'écran
+    function sendKisses() {
+      for (let i = 0; i < 20; i++) {
+        let kiss = document.createElement('div');
+        kiss.className = 'kiss';
+        kiss.innerHTML = '💋'; // Emoji de bisous
+        kiss.style.left = Math.random() * window.innerWidth + 'px';
+        kiss.style.top = Math.random() * window.innerHeight + 'px';
+        kiss.style.animationDuration = (Math.random() * 2 + 2) + 's'; // Durée aléatoire pour la montée des bisous
+        document.body.appendChild(kiss);
+
+        // Supprimer les bisous après l'animation
+        setTimeout(() => {
+          kiss.remove();
+        }, 3000);
+      }
+    }
+
+    // Fonction pour générer une couleur aléatoire pour les confettis
+    function getRandomColor() {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    }
+  </script>
+
+</body>
+</html>
